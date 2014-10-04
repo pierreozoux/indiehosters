@@ -33,8 +33,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       core.vm.hostname = "coreos.dev"
       core.vm.network :private_network, ip: "#{BASE_IP_ADDR}.#{i+1}"
       config.vm.synced_folder ".", "/data/infrastructure"
-      core.vm.provision :file, source: "./config/user-data", destination: "/tmp/vagrantfile-user-data"
-      core.vm.provision :shell, path: "./scripts/vagrant.sh"
+      core.vm.provision :file, source: "./config/user-data", destination: "/var/lib/coreos-vagrant/vagrantfile-user-data"
+      core.vm.provision :shell, path: "./scripts/setup.sh"
     end
   end
 end
