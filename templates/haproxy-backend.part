@@ -1,11 +1,5 @@
 
 # %HOSTNAME%:
-frontend http-in
-    bind *:80
-    acl is_%HOSTNAME%          hdr_end(host) -i %HOSTNAME%
-
-    use_backend %HOSTNAME%      if is_%HOSTNAME%
-
 backend %HOSTNAME%
     cookie SERVERID insert nocache indirect
     option httpclose

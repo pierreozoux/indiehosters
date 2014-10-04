@@ -35,6 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.synced_folder ".", "/data/infrastructure"
       core.vm.provision :file, source: "./config/user-data", destination: "/var/lib/coreos-vagrant/vagrantfile-user-data"
       core.vm.provision :shell, path: "./scripts/setup.sh"
+      core.vm.provision :shell, path: "./scripts/adduser.sh `hostname`"
     end
   end
 end
