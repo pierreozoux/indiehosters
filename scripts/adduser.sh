@@ -1,8 +1,8 @@
 #!/bin/bash -eux
 
 # Start wordpress service for new site (and create the user)
-systemctl enable wordpress@{$1}.service
-systemctl start  wordpress@{$1}.service
+systemctl enable wordpress@$1.service
+systemctl start  wordpress@$1.service
 
 # Configure new site in HAproxy
 IP=`docker inspect --format '{{.NetworkSettings.IPAddress}}' wordpress-$1`
