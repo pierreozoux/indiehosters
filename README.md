@@ -15,6 +15,6 @@ Wait for the provisioning to finish (~40mins), and go to your browser: http://co
 ### If you want to add another wordpress instance:
 ```bash
 vagrant ssh
-sudo sh /data/infrastructure/scripts/adduser.sh example.dev
+sudo sh /data/infrastructure/scripts/adduser.sh example.dev wordpress
 ```
 Check http://example.dev in your bowser!

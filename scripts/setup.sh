@@ -7,6 +7,7 @@ systemctl daemon-reload
 # Pull relevant docker images
 docker pull tutum/mysql
 docker pull tutum/wordpress-stackable
+docker pull tutum/nginx
 
 # Configure and start HAproxy
 docker pull dockerfile/haproxy
