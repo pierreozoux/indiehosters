@@ -15,5 +15,11 @@ defaults
     timeout client 50000
     timeout server 50000
 
+frontend https-in
+mode http
+ bind *:443 ssl crt /haproxy-override/certs/default/combined.pem
+ reqadd X-Forwarded-Proto:\ https
+default_backend default
+    
 frontend http-in
     bind *:80
