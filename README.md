@@ -5,7 +5,7 @@
   - run `vagrant plugin install vagrant-hostsupdater` to install
 
 ## Get started:
-- Put a TLS certificate ([public, intermediate, and private all concatenated into one .pem file](https://www.digitalocean.com/community/tutorials/how-to-implement-ssl-termination-with-haproxy-on-ubuntu-14-04)) in /data/server-wide/haproxy/certs/default.pem on the host system.
+- Put a TLS certificate ([public, intermediate, and private all concatenated into one .pem file](https://www.digitalocean.com/community/tutorials/how-to-implement-ssl-termination-with-haproxy-on-ubuntu-14-04)) in /data/server-wide/haproxy/approved-certs/default.pem on the host system.
 
 ```bash
 vagrant up
