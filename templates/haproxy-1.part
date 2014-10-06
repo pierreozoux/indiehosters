@@ -17,9 +17,7 @@ defaults
 
 frontend https-in
 mode http
- bind *:443 ssl crt /haproxy-override/certs/default/combined.pem
+ bind *:443 ssl crt-list /haproxy-override/certs/list.txt crt /data/server-wide/haproxy/certs/default/combined.pem
  reqadd X-Forwarded-Proto:\ https
-default_backend default
-    
-frontend http-in
-    bind *:80
+
+
