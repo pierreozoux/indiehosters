@@ -37,7 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.synced_folder "/data", "/data"
       core.vm.provision :file, source: "./config/user-data", destination: "/var/lib/coreos-vagrant/vagrantfile-user-data"
       core.vm.provision :shell, path: "./scripts/setup.sh"
-      core.vm.provision :shell, path: "./scripts/approve-user.sh", args: ["default", "nginx"]
+      core.vm.provision :shell, path: "./scripts/approve-user.sh", args: [HOSTNAME, "nginx"]
     end
   end
 end

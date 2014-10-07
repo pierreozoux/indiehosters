@@ -1,6 +1,6 @@
 
 
-default_backend default
+default_backend coreos.dev
     
 frontend http-in
     bind *:80
