@@ -8,12 +8,12 @@ cp /data/infrastructure/unit-files/* /etc/systemd/system
 systemctl daemon-reload
 
 # Pull relevant docker images
-docker pull tutum/mysql
-docker pull tutum/wordpress-stackable
-docker pull tutum/nginx
+docker pull indiehosters/mysql
+docker pull indiehosters/wordpress
+docker pull indiehosters/nginx
 
 # Configure and start HAproxy
-docker pull dockerfile/haproxy
+docker pull indiehosters/haproxy
 mkdir -p /data/server-wide/haproxy/certs
 touch /data/server-wide/haproxy/certs/list.txt
 cp /data/infrastructure/templates/haproxy-*.part /data/server-wide/haproxy/
