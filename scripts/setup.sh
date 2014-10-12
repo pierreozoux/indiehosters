@@ -12,7 +12,7 @@ systemctl daemon-reload
 # Pull relevant docker images
 docker pull indiehosters/haproxy-confd
 docker pull indiehosters/mysql
-docker pull indiehosters/wordpress-stackable
+docker pull indiehosters/wordpress
 docker pull indiehosters/nginx
 
 # Configure and start HAproxy
