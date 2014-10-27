@@ -21,6 +21,7 @@ vagrant up
 ```
 
 Wait for the provisioning to finish (~5mins), and go to your browser: https://indiehosters.dev
+If the process fails, for instance due to network problems, you can retry by running `vagrant provision`.
 
 ### If you want to add another nginx instance apart from indiehosters.dev:
 
