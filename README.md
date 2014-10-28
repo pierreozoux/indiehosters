@@ -27,7 +27,7 @@ If the process fails, for instance due to network problems, you can retry by run
 
 ```bash
 vagrant ssh
-sh /data/indiehosters/scripts/activate-user.sh example.dev nginx
+sudo sh /data/indiehosters/scripts/activate-user.sh example.dev nginx https://github.com/indiehosters/website-static.git
 ```
 Check https://example.dev in your bowser!
 
