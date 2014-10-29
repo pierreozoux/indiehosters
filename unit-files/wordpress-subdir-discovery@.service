@@ -3,14 +3,14 @@ Description=%p for %i etcd registration
 
 # Requirements
 Requires=etcd.service
-Requires=wordpress@%i.service
+Requires=wordpress-subdir@%i.service
 
 # Dependency ordering
 After=etcd.service
-After=wordpress@%i.service
+After=wordpress-subdir@%i.service
 
 # Dependency binding
-BindsTo=wordpress@%i.service
+BindsTo=wordpress-subdir@%i.service
 
 [Service]
 # Start
