@@ -7,8 +7,8 @@ if [ ! -d "/data/per-user/$USER/wordpress-subdir/data" ]; then
 fi
 
 if [ ! -e "/data/per-user/$USER/wordpress-subdir/data/www-content/index.html" ]; then
-  if [ -e "/data/per-user/$USER/wordpress-subdir/data/git-url.txt" ]; then
-    git clone `cat /data/per-user/$USER/wordpress-subdir/data/git-url.txt` /data/per-user/$USER/wordpress-subdir/data/www-content
+  if [ -e "/data/per-user/$USER/wordpress-subdir/data/GITURL" ]; then
+    git clone `cat /data/per-user/$USER/wordpress-subdir/data/GITURL` /data/per-user/$USER/wordpress-subdir/data/www-content
   else
     mkdir -p /data/per-user/$USER/wordpress-subdir/data/www-content
     echo Hello $USER > /data/per-user/$USER/wordpress-subdir/data/www-content/index.html
