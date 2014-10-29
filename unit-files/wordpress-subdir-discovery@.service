@@ -18,7 +18,7 @@ BindsTo=wordpress-subdir@%i.service
 ExecStart=/bin/bash -c ' \
   sleep 3; \
   while true; do \
-    app=`echo %p | cut -d"-" -f1`; \
+    app=`echo %p | cut -d"-" -f1,2`; \
     ip=`docker inspect --format \'{{.NetworkSettings.IPAddress}}\' $app-%i`; \
     curl -f $ip; \
     if [ $? -eq 0 ]; then \
