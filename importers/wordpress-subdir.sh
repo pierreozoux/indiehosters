@@ -9,6 +9,7 @@ fi
 if [ ! -e "/data/per-user/$USER/wordpress-subdir/data/www-content/index.html" ]; then
   if [ -e "/data/per-user/$USER/wordpress-subdir/data/GITURL" ]; then
     git clone `cat /data/per-user/$USER/wordpress-subdir/data/GITURL` /data/per-user/$USER/wordpress-subdir/data/www-content
+    cd /data/per-user/$USER/wordpress-subdir/data/www-content && git checkout master
   else
     mkdir -p /data/per-user/$USER/wordpress-subdir/data/www-content
     echo Hello $USER > /data/per-user/$USER/wordpress-subdir/data/www-content/index.html
