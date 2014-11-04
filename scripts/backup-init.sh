@@ -18,11 +18,11 @@ echo initializing backups for $USER
 mkdir -p /data/per-user/$USER/backup/mysql
 mkdir -p /data/per-user/$USER/backup/www
 mkdir -p /data/per-user/$USER/backup/TLS
-git config --global user.email "backups@`hostname`"
-git config --global user.name "`hostname` hourly backups"
-git config --global push.default simple
-
 cd /data/per-user/$USER/backup/
+git config --local user.email "backups@`hostname`"
+git config --local user.name "`hostname` hourly backups"
+git config --local push.default simple
+
 if [ -e /data/per-user/$USER/backup/.git ]; then
   git init
 fi
