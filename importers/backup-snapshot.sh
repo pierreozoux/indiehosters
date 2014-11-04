@@ -19,6 +19,7 @@ if [ -e /data/per-user/$USER/wordpress ]; then
 fi
 
 if [ -e /data/per-user/$USER/nginx ]; then
+  mkdir -p /data/per-user/$USER/backup/www/nginx/
   if [ -e /data/per-user/$USER/nginx/data/GITURL ]; then
     cp /data/per-user/$USER/nginx/data/GITURL /data/per-user/$USER/backup/www/nginx/GITURL
   else
@@ -31,6 +32,8 @@ cp /data/server-wide/haproxy/approved-certs/$USER.pem /data/per-user/$USER/backu
 
 cd /data/per-user/$USER/backup/
 git add *
+pwd
+git status
 git commit -m"backup $USER @ `hostname` - `date`"
 if [ -e /data/per-user/$USER/backup/BACKUPDEST ]; then
   git pull --rebase
