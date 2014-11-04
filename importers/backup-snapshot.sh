@@ -19,6 +19,7 @@ if [ -e /data/per-user/$USER/wordpress ]; then
 fi
 
 if [ -e /data/per-user/$USER/nginx ]; then
+  echo backing up www from nginx for $USER
   mkdir -p /data/per-user/$USER/backup/www/nginx/
   if [ -e /data/per-user/$USER/nginx/data/GITURL ]; then
     cp /data/per-user/$USER/nginx/data/GITURL /data/per-user/$USER/backup/www/nginx/GITURL
@@ -27,12 +28,14 @@ if [ -e /data/per-user/$USER/nginx ]; then
   fi
 fi
 
+echo copying TLS cert
 mkdir -p /data/per-user/$USER/backup/TLS/
 cp /data/server-wide/haproxy/approved-certs/$USER.pem /data/per-user/$USER/backup/TLS/$USER.pem
 
+echo committing everything
 cd /data/per-user/$USER/backup/
-git add *
 pwd
+git add *
 git status
 git commit -m"backup $USER @ `hostname` - `date`"
 if [ -e /data/per-user/$USER/backup/BACKUPDEST ]; then
