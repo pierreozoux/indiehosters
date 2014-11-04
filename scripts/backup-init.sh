@@ -14,6 +14,7 @@ sudo echo "$BACKUPDEST" > /data/per-user/$USER/backup/BACKUPDEST
 echo initializing backups for $USER
 mkdir -p /data/per-user/$USER/backup/mysql
 mkdir -p /data/per-user/$USER/backup/www
+mkdir -p /data/per-user/$USER/backup/TLS
 git config --global user.email "backups@`hostname`"
 git config --global user.name "`hostname` hourly backups"
 git config --global push.default simple
@@ -24,7 +25,7 @@ echo "backups of $USER at IndieHosters server `hostname`" > README.md
 git add README.md
 git commit -m"initial commit"
 
-echo "pushing initial commit to $BACKUPDEST master branch"
+echo "Pushing initial commit to $BACKUPDEST master branch"
 cd /data/per-user/$USER/backup/
 git remote add destination $BACKUPDEST
 git push -u destination master

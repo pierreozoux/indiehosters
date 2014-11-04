@@ -26,6 +26,9 @@ if [ -e /data/per-user/$USER/nginx ]; then
   fi
 fi
 
+mkdir -p /data/per-user/$USER/backup/TLS/
+cp /data/server-wide/haproxy/approved-certs/$USER.pem /data/per-user/$USER/backup/TLS/$USER.pem
+
 cd /data/per-user/$USER/backup/
 git add *
 git commit -m"backup $USER @ `hostname` - `date`"
