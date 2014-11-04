@@ -8,6 +8,7 @@ Requires=mysql@%i.service
 Requires=%p-importer@%i.service
 Requires=%p-discovery@%i.service
 Requires=backup@%i.timer
+Wants=%p-gitpuller@%i.service
 
 # Dependency ordering
 After=docker.service
@@ -22,10 +23,11 @@ ExecStartPre=-/usr/bin/docker rm %p-%i
 ExecStart=/usr/bin/docker run \
   --name %p-%i \
   --link mysql-%i:db \
-  -v /data/per-user/%i/%p/data/wp-content:/app/wp-content \
-  -v /data/per-user/%i/%p/data/.htaccess:/app/.htaccess \
+  -v /data/per-user/%i/%p/data/wp-content:/wordpress/wp-content \
+  -v /data/per-user/%i/%p/data/.htaccess:/wordpress/.htaccess \
+  -v /data/per-user/%i/%p/data/www-content:/app \
   --env-file /data/per-user/%i/%p/.env \
-  indiehosters/wordpress
+  indiehosters/wordpress-subdir
 ExecReload=/usr/bin/docker restart %p-%i
 ExecStop=/usr/bin/docker stop %p-%i
 
