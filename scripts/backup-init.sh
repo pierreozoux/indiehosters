@@ -8,6 +8,9 @@ else
 fi
 echo "Adding backup job for $USER to $BACKUPDEST"
 
+echo "First, trying to clone latest master from $BACKUPDEST"
+git clone $BACKUPDEST /data/per-user/$USER/backup
+
 sudo mkdir -p /data/per-user/$USER/backup
 sudo echo "$BACKUPDEST" > /data/per-user/$USER/backup/BACKUPDEST
 
@@ -20,7 +23,9 @@ git config --global user.name "`hostname` hourly backups"
 git config --global push.default simple
 
 cd /data/per-user/$USER/backup/
-git init
+if [ -e /data/per-user/$USER/backup/.git ]; then
+  git init
+fi
 echo "backups of $USER at IndieHosters server `hostname`" > README.md
 git add README.md
 git commit -m"initial commit"
