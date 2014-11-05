@@ -60,6 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       core.vm.synced_folder ".", "/data/indiehosters", id: "coreos-indiehosters", :nfs => true, :mount_options => ['nolock,vers=3,udp']
       core.vm.provision :file, source: "./cloud-config", destination: "/tmp/vagrantfile-user-data"
       $install_insecure_keys = <<SCRIPT
+mkdir ~/.ssh
 wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -O ~/.ssh/id_rsa.pub
 wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant -O ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
