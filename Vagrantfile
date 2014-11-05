@@ -37,8 +37,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     backup.vm.hostname = "backup.dev"
     backup.vm.network :private_network, ip: "192.168.65.100"
-    backup.vm.provision :shell, inline: "mkdir -p /data/runtime/haproxy/approved-certs; cp /data/indiehosters/scripts/unsecure-certs/*.pem /data/runtime/haproxy/approved-certs"
-    backup.vm.provision :shell, path: "./scripts/setup.sh", args: [HOSTNAME]
   end
 
   (1..$num_instances).each do |i|
