@@ -11,18 +11,16 @@ Make sure you read [getting started](getting-started-as-a-hoster.md) first.
 * Give the new server a name (in this example, we call the server 'k3')
 * Add k3 to your /etc/hosts with the right IP address
 * If you have used this name before, run `./deploy/forget-server-fingerprint.sh k3`
-* From the root folder of this repository, run `sh ./deploy/deploy.sh k3 ./data/ master root` (where `./data/` should contain
-  `runtime/postfix/`
-  and `runtime/haproxy/approved-certs/k3.pem`; see the existing folder `data/` in this repo for an example of what the email forwards and
-  TLS certificate files should look like).
+* ssh into your server, and run `ssh-keygen -t rsa`  (use all the default settings, empty passphrase)
+* set up a backups server at an independent location (at least a different data center, but preferably also a different IaaS provider, the bu25 plan of https://securedragon.net/ is a good option at 3 dollars per month).
+* set up a git server with one private git repo per domain by following http://www.git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server (instead of 'project.git' you can use 'domainname.com.git'). Do this for your default domain (e.g. k3.you.indiehosters.net), and for each domain you plan on hosting on this server. Let's call the backup server 'bu25' (add this to /etc/hosts on k3).
+* add the ssh key from k3 to the authorized_keys for the git user on bu25.
+* Exit from the double ssh back to your laptop, and from the root folder of this repository, run `sh ./deploy/deploy.sh k3 ./data/ master root` (where `./data/` should contain `runtime/postfix/`
+  and `runtime/haproxy/approved-certs/k3.you.indiehosters.pem` (could be self-signed); see the existing folder `data/` in this repo for an example of what the email forwards and TLS certificate files should look like).
 * Add the default site by following the 'Adding a website to your server' instructions below with domain name k3 instead of example.com
 * The rest should be automatic!
 
 ### Preparing backups
-
-* ssh into your server, and run `ssh-keygen -t rsa`
-* set up a backups server at an independent location (at least a different data center, but preferably also a different IaaS provider, the bu25 plan of https://securedragon.net/ is a good option at 3 dollars per month).
-* set up a git server with one private git repo per domain by following http://www.git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server (instead of 'project.git' you can use 'domainname.com.git')
 
 ### Adding a website to your server
 * For each site you want to deploy on the server, e.g. example.com, do the following:
