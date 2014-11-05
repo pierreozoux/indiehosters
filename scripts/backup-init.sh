@@ -9,8 +9,8 @@ if [ ! -d /data/domains/$DOMAIN ]; then
       mkdir -p $DOMAIN; \
       cd $DOMAIN; \
       git init --bare; \
-    else
-      echo \"Git folder already present\"
+    else \
+      echo \"Git folder already present\"; \
     fi"
   git clone $BACKUP_DESTINATION:$DOMAIN /data/domains/$DOMAIN
   cd /data/domains/$DOMAIN
