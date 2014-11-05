@@ -22,12 +22,13 @@ echo "Backups will live under $BACKUP_DEST"
 echo "IndieHosters repo branch is $BRANCH"
 echo "Remote user is $USER"
 
-echo $BACKUP_DEST > ./deploy/tmp.txt
-scp ./deploy/tmp.txt $USER@SERVER:/data/BACKUP_DESTINATION
-rm ./deploy/tmp.txt
-
 scp ./deploy/onServer.sh $USER@$SERVER:
 
 ssh $USER@$SERVER sudo mkdir -p /var/lib/coreos-install/
 scp cloud-config $USER@$SERVER:/var/lib/coreos-install/user_data
-ssh $USER@$SERVER sudo sh ./onServer.sh $BRANCH $SERVER $BACKUP_DEST
+ssh $USER@$SERVER sudo sh ./onServer.sh $BRANCH $SERVER
+
+# overrides BACKUP_DESTINATION from cloud-config
+echo $BACKUP_DEST > ./deploy/tmp.txt
+scp ./deploy/tmp.txt $USER@SERVER:/data/BACKUP_DESTINATION
+rm ./deploy/tmp.txt
