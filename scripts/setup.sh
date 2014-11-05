@@ -1,9 +1,10 @@
 #!/bin/bash -eux
 
-if [ $# -ge 1 ]; then
+if [ $# -ge 2 ]; then
   HOSTNAME=$1
+  BACKUPDEST=$2
 else
-  echo "Usage: sh /data/indiehosters/scripts/setup.sh k1.you.indiehosters.net"
+  echo "Usage: sh /data/indiehosters/scripts/setup.sh k1.you.indiehosters.net git@bu1.you.indiehosters.net:/opt/git"
   exit 1
 fi
 
@@ -27,6 +28,9 @@ systemctl daemon-reload
 # Activate default domain
 sh /data/indiehosters/scripts/activate-user.sh $HOSTNAME static
 etcdctl set /services/default '{"app":"static", "hostname":"'$HOSTNAME'"}'
+
+# Configure Backup
+etcdctl set /backup/destination/prefix $BACKUPDEST
 
 # Configure and start HAproxy
 mkdir -p /data/runtime/haproxy/approved-certs
