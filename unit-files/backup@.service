@@ -15,9 +15,8 @@ ExecStartPre=/bin/bash -euxc ' \
           --all-databases \
           --events \
           -u admin \
-          -p $mysql_passwd\
-          -h db \
-          > /data/domains/%i/mysql/dump.sql; \
+          -p$mysql_passwd \
+          -h db > /data/domains/%i/mysql/dump.sql; \
   fi'
 
 ExecStart=/bin/bash -euxc ' \
@@ -25,7 +24,7 @@ ExecStart=/bin/bash -euxc ' \
   cd /data/domains/%i/; \
   git add *; \
   git status; \
-  git commit -m"backup %i @ `hostname` - `date`"; \
+  git commit --allow-empty -m"backup %i @ `hostname` - `date`"; \
   # be careful: hidden sync functionnality; \
   git pull --rebase; \
-  git push -u origin master'
+  git push origin master'
