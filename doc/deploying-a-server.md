@@ -3,8 +3,9 @@
 ## Before you start
 Make sure you read [getting started](getting-started-as-a-hoster.md) first.
 
-### Prepare your orchestration data
-* Get a CoreOS server, for instance from [RackSpace](rackspace.com) or [Vultr](vultr.com).
+### Preparing a server from scratch
+* Get a server which runs either CoreOS or Ubuntu 14.10, for instance from [RackSpace](rackspace.com) or [Vultr](vultr.com).
+* If you chose Ubuntu 14.10, then follow [these setup instructions](running-on-ubuntu.md) first. CoreOS is ready to go out of the box.
 * If you didn't add your public ssh key during the order process (e.g. through your IaaS control panel or a cloud-config file),
   scp your laptop's public ssh key (probably in `~/.ssh/id_rsa.pub`) to `.ssh/authorized_keys` for the remote user
   you will be ssh-ing and scp-ing as (the default remote user of our deploy scripts is 'core').
@@ -13,10 +14,10 @@ Make sure you read [getting started](getting-started-as-a-hoster.md) first.
 * If you have used this name before, run `./deploy/forget-server-fingerprint.sh k3`
 * Ssh into your server, and run `ssh-keygen -t rsa`  (use all the default settings, empty passphrase)
 * Set up a backups server at an independent location (at least a different data center, but preferably also a different IaaS provider, the bu25 plan of https://securedragon.net/ is a good option at 3 dollars per month).
-* Set up a git server by following http://www.git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server (no need to set up any repos like 'project.git' yet).  Let's call the backup server 'bu25' (add this to /etc/hosts on k3).
-* add the ssh key from k3 to the authorized_keys for the git user (not the root user) on bu25.
+* On the backup server, set up a git server by following http://www.git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server (no need to set up any repos like 'project.git' yet).  Let's call the backup server 'bu25' (add this to /etc/hosts on k3).
+* Add the ssh key from k3 to the authorized_keys for the git user (not the root user) on bu25.
 * Find a friend who is willing to host independent secondary backups. This is the person your users will contact if you get hit by a bus.
-* When hosting a secondary backup for someone else, you want to give them an ssh user with shell access. Make sure it's a different user from the one to which you do your own backups, of course.
+* When hosting secondary backups for other people, make sure you set up one git server for each friend. Test that the user you created cannot use sudo and cannot damage any data outside its own home directory.
 * Let's say your account on the friend's git server is called 'you@secondary'. Make sure it is also reachable by ssh from your server.
 * From your laptop, and from the root folder of this repository, run `sh ./deploy/deploy.sh k3 git@bu25 you@secondary master root`
 * The rest should be automatic!
