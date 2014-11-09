@@ -3,34 +3,16 @@ To run an IndieHosters on ubuntu 14.10 (earlier versions will not work), run som
   apt-get update && apt-get -y upgrade
   dpkg-reconfigure -plow unattended-upgrades
   # set unattended upgrades to 'Yes'
-  apt-get -y install systemd-sysv ruby-dev gcc make git
+  apt-get -y install systemd-sysv git docker.io
+  docker run -d --restart='always' -p 4001:4001  quay.io/coreos/etcd:v0.4.6
+  echo "#!/bin/sh" > /usr/local/etcdctl
+  echo "docker run --net=host quay.io/coreos/etcd:v0.4.6 /etcdctl $1 $2 $3 $4" >> /usr/local/etcdctl
   shutdown -r now
 
-  mkdir etcd-build
-  cd etcd-build
-  gem install fpm
-  curl -L https://raw.githubusercontent.com/solarkennedy/etcd-packages/master/Makefile  > Makefile
-  make deb
-  dpkg -i etcd_0.4.3_amd64.deb
-  git clone https://github.com/indiehosters/indiehosters /data/indiehosters
-  cp /data/indiehosters/deploy/etcd.conf /etc/etcd/
-  etcd &
+  systemctl start docker # This will be automatic once the IndieHosters unit-files are installed
   systemctl list-units
+  docker ps
   etcdctl ls
+  etcdctl help
 
-Right now this still give the following problem:
-
-````
-root@ku:~# etcd &
-[1] 3584
-root@ku:~# [etcd] Nov  5 23:59:45.781 INFO      | Discovery via https://discovery.etcd.io using prefix /.
-[etcd] Nov  5 23:59:46.019 WARNING   | Discovery encountered an error: invalid character 'p' after top-level value
-[etcd] Nov  5 23:59:46.019 WARNING   | etcd failed to connect discovery service[https://discovery.etcd.io/]: invalid character 'p' after top-level value
-[etcd] Nov  5 23:59:46.019 CRITICAL  | etcd, the new instance, must register itself to discovery service as required
-
-[1]+  Exit 1                  etcd
-root@ku:~# 
-````
-
-But we're working on fixing that somehow.
-
+Now follow the [CoreOS-based instructions](deploying-a-server.md)
