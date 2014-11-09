@@ -20,7 +20,8 @@ Make sure you read [getting started](getting-started-as-a-hoster.md) first.
 * When hosting secondary backups for other people, make sure you set up one git server for each friend. Test that the user you created cannot use sudo and cannot damage any data outside its own home directory.
 * Let's say your account on the friend's git server is called 'you@secondary'. Make sure it is also reachable by ssh from your server.
 * From your laptop, and from the root folder of this repository, run `sh ./deploy/deploy.sh k3 git@bu25 you@secondary master root`
-* The rest should be automatic!
+* This script will set up your server. If it times out or errors, you can safely run it a second time.
+* The rest should be automatic! This will start the postfix-forwarder and haproxy-confd containers (haproxy will start with the first domain).
 
 ### Adding a website to your server
 * For each site you want to deploy on the server, e.g. example.com, do the following:
