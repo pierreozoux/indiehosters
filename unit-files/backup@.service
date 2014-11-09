@@ -27,5 +27,5 @@ ExecStart=/bin/bash -euxc ' \
   git commit --allow-empty -m"backup %i @ `hostname` - `date`"; \
   # be careful: hidden sync functionality; \
   git pull --rebase; \
-  git push origin master'
+  git push origin master \
   git push secondary master'
