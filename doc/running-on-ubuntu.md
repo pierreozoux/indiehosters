@@ -11,7 +11,7 @@ ExecStartPre=-/usr/bin/docker kill etcd\n\
 ExecStartPre=-/usr/bin/docker rm etcd\n\
 ExecStart=/usr/bin/docker run \
   --name etcd \
-  -p 127.0.0.1:4001:4001 \
+  -p 4001:4001 \
   quay.io/coreos/etcd:v0.4.6\n\
 ExecReload=/usr/bin/docker restart etcd\n\
 ExecStop=/usr/bin/docker stop etcd\n\
