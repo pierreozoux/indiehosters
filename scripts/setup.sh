@@ -7,9 +7,16 @@ else
   exit 1
 fi
 
-# Install cloud-config
-if [ -f /tmp/vagrantfile-user-data ]; then
-  mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/vagrantfile-user-data
+# Install cloud-config for vagrant or production
+if [ -f /tmp/cloud-config-vagrant ]; then
+  mv /tmp/cloud-config-vagrant /var/lib/coreos-vagrant/vagrantfile-user-data
+else
+  if [ -e /usr/bin/coreos-cloudinit ]; then
+    echo Starting etcd using cloud-config-production:
+    sudo mkdir -p /var/lib/coreos-install/
+    cp /data/indiehosters/cloud-config-production /var/lib/coreos-install/user_data
+    /usr/bin/coreos-cloudinit --from-file=/var/lib/coreos-install/user_data
+  fi
 fi
 
 # Pull relevant docker images

@@ -3,11 +3,6 @@
 #Usage from deploy/deploy.sh:
 #ssh $USER@$SERVER sudo sh ./onServer.sh $BRANCH $SERVER
 
-if [ -e /usr/bin/coreos-cloudinit ]; then
-  echo Starting etcd:
-  /usr/bin/coreos-cloudinit --from-file=/var/lib/coreos-install/user_data
-fi
-
 echo Cloning the indiehosters repo into /data/indiehosters:
 mkdir -p /data
 cd /data
