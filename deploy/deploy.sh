@@ -23,15 +23,17 @@ echo "Backups will be pushed to $BACKUP_DESTINATION_1 and $BACKUP_DESTINATION_2"
 echo "IndieHosters repo branch is $BRANCH"
 echo "Remote user is $USER"
 
-scp ./deploy/onServer.sh $USER@$SERVER:
+rm -rf ./deploy/data
+mkdir -p ./deploy/data
+echo $BACKUP_DESTINATION_1 > ./deploy/data/BACKUP_DESTINATION_1
+echo $BACKUP_DESTINATION_2 > ./deploy/data/BACKUP_DESTINATION_2
 
-# overrides BACKUP_DESTINATION_1 from cloud-config
-echo $BACKUP_DESTINATION_1 > ./deploy/tmp1.txt
-scp ./deploy/tmp1.txt $USER@$SERVER:/data/BACKUP_DESTINATION_1
-rm ./deploy/tmp1.txt
+printf "#!/bin/bash\nmkdir -p /data\n\
+git clone https://github.com/indiehosters/indiehosters.git /data/indiehosters\n\
+cd /data/indiehosters && git checkout $BRANCH && git pull\n\
+sh scripts/setup.sh $SERVER\n" > ./deploy/data/onServer.sh
 
-echo $BACKUP_DESTINATION_2 > ./deploy/tmp2.txt
-scp ./deploy/tmp2.txt $USER@$SERVER:/data/BACKUP_DESTINATION_2
-rm ./deploy/tmp2.txt
+scp -r ./deploy/data $USER@$SERVER:/
+rm -rf ./deploy/data
 
-ssh $USER@$SERVER sudo sh ./onServer.sh $BRANCH $SERVER
+ssh $USER@$SERVER sudo sh /data/onServer.sh
