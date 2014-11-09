@@ -4,15 +4,15 @@ Description=%p-%i
 # Requirements
 Requires=docker.service
 Requires=etcd.service
-Requires=mysql@%i.service
 Requires=%p-importer@%i.service
+Requires=mysql@%i.service
 Requires=%p-discovery@%i.service
 Requires=backup@%i.timer
 
 # Dependency ordering
 After=docker.service
-After=mysql@%i.service
 After=%p-importer@%i.service
+After=mysql@%i.service
 Before=%p-discovery@%i.service
 
 [Service]
