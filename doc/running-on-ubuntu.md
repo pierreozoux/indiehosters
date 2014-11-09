@@ -1,13 +1,18 @@
 To run an IndieHosters on ubuntu 14.10 (earlier versions will not work), run something like:
 
-  apt-get update
-  apt-get install systemd-sysv ruby-dev gcc make
+  apt-get update && apt-get -y upgrade
+  dpkg-reconfigure -plow unattended-upgrades
+  # set unattended upgrades to 'Yes'
+  apt-get -y install systemd-sysv ruby-dev gcc make git
   shutdown -r now
 
+  mkdir etcd-build
+  cd etcd-build
   gem install fpm
   curl -L https://raw.githubusercontent.com/solarkennedy/etcd-packages/master/Makefile  > Makefile
   make deb
   dpkg -i etcd_0.4.3_amd64.deb
+  git clone https://github.com/indiehosters/indiehosters /data/indiehosters
   cp /data/indiehosters/deploy/etcd.conf /etc/etcd/
   etcd &
   systemctl list-units
