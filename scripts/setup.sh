@@ -44,5 +44,6 @@ touch /data/runtime/postfix/forwards
 systemctl enable postfix.service
 systemctl start  postfix.service
 
-# Adds backup ssh key to the list of known hosts
-ssh -o StrictHostKeyChecking=no `cat /data/BACKUP_DESTINATION` "exit"
+# Adds backup ssh keys to the list of known hosts
+ssh -o StrictHostKeyChecking=no `cat /data/BACKUP_DESTINATION_1` "exit"
+ssh -o StrictHostKeyChecking=no `cat /data/BACKUP_DESTINATION_2` "exit"

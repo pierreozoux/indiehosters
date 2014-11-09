@@ -11,11 +11,14 @@ Make sure you read [getting started](getting-started-as-a-hoster.md) first.
 * Give the new server a name (in this example, we call the server 'k3')
 * Add k3 to your /etc/hosts with the right IP address
 * If you have used this name before, run `./deploy/forget-server-fingerprint.sh k3`
-* ssh into your server, and run `ssh-keygen -t rsa`  (use all the default settings, empty passphrase)
-* set up a backups server at an independent location (at least a different data center, but preferably also a different IaaS provider, the bu25 plan of https://securedragon.net/ is a good option at 3 dollars per month).
-* set up a git server by following http://www.git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server (no need to set up any repos like 'project.git' yet).  Let's call the backup server 'bu25' (add this to /etc/hosts on k3).
+* Ssh into your server, and run `ssh-keygen -t rsa`  (use all the default settings, empty passphrase)
+* Set up a backups server at an independent location (at least a different data center, but preferably also a different IaaS provider, the bu25 plan of https://securedragon.net/ is a good option at 3 dollars per month).
+* Set up a git server by following http://www.git-scm.com/book/en/v2/Git-on-the-Server-Setting-Up-the-Server (no need to set up any repos like 'project.git' yet).  Let's call the backup server 'bu25' (add this to /etc/hosts on k3).
 * add the ssh key from k3 to the authorized_keys for the git user (not the root user) on bu25.
-* Exit from the double ssh back to your laptop, and from the root folder of this repository, run `sh ./deploy/deploy.sh k3 git@bu25 master root`
+* Find a friend who is willing to host independent secondary backups. This is the person your users will contact if you get hit by a bus.
+* When hosting a secondary backup for someone else, you want to give them an ssh user with shell access. Make sure it's a different user from the one to which you do your own backups, of course.
+* Let's say your account on the friend's git server is called 'you@secondary'. Make sure it is also reachable by ssh from your server.
+* From your laptop, and from the root folder of this repository, run `sh ./deploy/deploy.sh k3 git@bu25 you@secondary master root`
 * The rest should be automatic!
 
 ### Adding a website to your server
