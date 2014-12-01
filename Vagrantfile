@@ -58,7 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       core.hostsupdater.aliases = ["example.dev"]
       core.vm.network :private_network, ip: "#{BASE_IP_ADDR}.#{i+1}"
       core.vm.synced_folder ".", "/data/indiehosters", id: "coreos-indiehosters", :nfs => true, :mount_options => ['nolock,vers=3,udp']
-      core.vm.provision :file, source: "./cloud-config", destination: "/tmp/vagrantfile-user-data"
+      core.vm.provision :file, source: "./cloud-config-development", destination: "/tmp/vagrantfile-user-data"
       $install_insecure_keys = <<SCRIPT
 mkdir ~/.ssh
 wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -O ~/.ssh/id_rsa.pub

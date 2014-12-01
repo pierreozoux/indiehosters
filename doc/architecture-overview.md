@@ -10,7 +10,7 @@ The haproxy-confd service unit starts configuration service for haproxy. It moni
 
 There is currently no similar service for updating `/data/runtime/postfix/`, so you will have to update the configuration files in that folder manually, and then run `systemctl restart postfix`.
 
-Etcd is configured in the `cloud-config` file. The `scripts/setup.sh` takes care of enabling and starting the haproxy and postfix service, and the haproxy-confd to listen for changes in the backends configuration in [etcd](https://github.com/coreos/etcd). New backends are automatically added to the haproxy configuration as soon as their private docker IP address is written into etcd.
+Etcd is configured in the `cloud-config-production` file. The `scripts/setup.sh` takes care of enabling and starting the haproxy and postfix service, and the haproxy-confd to listen for changes in the backends configuration in [etcd](https://github.com/coreos/etcd). New backends are automatically added to the haproxy configuration as soon as their private docker IP address is written into etcd.
 
 ## HAProxy backends: static, static-git, wordpress
 

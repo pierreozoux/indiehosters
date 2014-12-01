@@ -1,0 +1,17 @@
+#cloud-config
+
+coreos:
+  update:
+    reboot-strategy: best-effort
+  etcd:
+    addr: 172.17.42.1:4001
+    peer-addr: 172.17.42.1:7001
+  units:
+    - name: etcd.service
+      command: start
+write_files:
+  - path: /data/BACKUP_DESTINATION
+    permissions: 0644
+    owner: root
+    content: |
+      core@backup.dev

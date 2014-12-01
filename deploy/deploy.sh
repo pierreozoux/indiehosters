@@ -25,7 +25,7 @@ echo "Remote user is $USER"
 scp ./deploy/onServer.sh $USER@$SERVER:
 
 ssh $USER@$SERVER sudo mkdir -p /var/lib/coreos-install/
-scp cloud-config $USER@$SERVER:/var/lib/coreos-install/user_data
+scp cloud-config-production $USER@$SERVER:/var/lib/coreos-install/user_data
 ssh $USER@$SERVER sudo sh ./onServer.sh $BRANCH $SERVER
 
 # overrides BACKUP_DESTINATION from cloud-config

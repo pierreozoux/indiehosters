@@ -7,7 +7,7 @@ else
   exit 1
 fi
 
-# Install cloud-config
+# Move cloud-config into place (vagrant only)
 if [ -f /tmp/vagrantfile-user-data ]; then
   mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/vagrantfile-user-data
 fi
