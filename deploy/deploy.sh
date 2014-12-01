@@ -28,7 +28,6 @@ ssh $USER@$SERVER sudo mkdir -p /var/lib/coreos-install/
 scp cloud-config-production $USER@$SERVER:/var/lib/coreos-install/user_data
 ssh $USER@$SERVER sudo sh ./onServer.sh $BRANCH $SERVER
 
-# overrides BACKUP_DESTINATION from cloud-config
 echo $BACKUP_DEST > ./deploy/tmp.txt
 scp ./deploy/tmp.txt $USER@$SERVER:/data/BACKUP_DESTINATION
 rm ./deploy/tmp.txt

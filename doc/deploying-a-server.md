@@ -18,7 +18,7 @@ Make sure you read [getting started](getting-started-as-a-hoster.md) first.
 * Add the ssh key from k3:.ssh/id_rsa.pub to the authorized_keys for the git user (not the root user) on bu25.
 * Check that you can `ssh git@bu25` from k3.
 * Exit from the double ssh back to your laptop, and from the root folder of this repository, run `sh ./deploy/deploy.sh k3 git@bu25 master root`
-* The rest should be automatic! (ignore the warning about backup.dev, and note that haproxy will not start as long as there are no websites on your server).
+* The rest should be automatic! (note that haproxy will not start as long as there are no websites on your server).
 
 ### Adding an existing website
 * The IndieHosters architecture is migration-oriented, so it aims to make moving a domain from one server to another very easy.
