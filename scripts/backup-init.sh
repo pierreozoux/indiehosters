@@ -19,6 +19,9 @@ if [ ! -d /data/domains/$DOMAIN/.git ]; then
     git init
     git remote add origin $BACKUP_DESTINATION:$DOMAIN
   fi
+  if [ -f /data/BACKUP_DESTINATION_2 ]; then
+    git remote add secondary `cat $BACKUP_DESTINATION_2`:$DOMAIN
+  fi
   git config --local user.email "backups@`hostname`"
   git config --local user.name "`hostname` hourly backups"
 fi

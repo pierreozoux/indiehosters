@@ -29,4 +29,7 @@ ExecStart=/bin/bash -euxc ' \
   git commit --allow-empty -m"backup %i @ `hostname` - `date`"; \
   echo "be careful: hidden sync functionnality"; \
   git pull --rebase; \
-  git push -u origin master'
+  git push -u origin master; \
+  if [ $(git remote | grep secondary | wc -l) -eq 1 ]; then \
+    git push -u secondary master; \
+  fi'
