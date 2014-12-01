@@ -8,6 +8,8 @@ ExecStartPre=/bin/bash -euxc ' \
     echo "Backing up mysql databases for %i"; \
     mysql_passwd=`cat /data/domains/%i/mysql/.env | cut -d= -f2`; \
     /usr/bin/docker run \
+      --rm \
+      --name mysqldump-%i \
       --link mysql-%i:db \
       --env-file /data/domains/%i/mysql/.env \
       indiehosters/mysql \
